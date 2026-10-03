@@ -183,8 +183,13 @@ def test_encode_character_round_trips_through_save_and_load(pack, tmp_path):
     )
     assert char.name == "Bo"
     assert [r.role for r in char.get_references()] == ["face", "body", "body"]
-    # Compiled for both reference archs, so it applies without a rebuild.
-    assert char.get_info().ref_archs == ["flux2-klein", "minimax-h3"]
+    # Compiled for every reference arch, so it applies without a rebuild.
+    assert char.get_info().ref_archs == [
+        "flux2-klein",
+        "krea2-turbo",
+        "minimax-h3",
+        "qwen-image-2.1",
+    ]
 
     saved = module.NODE_CLASS_MAPPINGS["OmnicharSaveCharacter"]().save(char, "bo")
     # An OUTPUT_NODE returns a ui payload alongside its result, or the node looks like a no-op.
@@ -373,7 +378,7 @@ def test_reference_latents_are_attached_in_one_append(pack):
     vae = FakeVae()
 
     base = [["cond", {}]]
-    (out,) = module.NODE_CLASS_MAPPINGS["OmnicharCharacterReferenceLatent"]().attach(
+    (out, images) = module.NODE_CLASS_MAPPINGS["OmnicharCharacterReferenceLatent"]().attach(
         base, refs, vae
     )
     # Every reference reaches the VAE, at its own size, with alpha dropped.
@@ -382,6 +387,8 @@ def test_reference_latents_are_attached_in_one_append(pack):
     assert out[0][1]["reference_latents"] == ["latent1", "latent2"]
     # The original conditioning is not mutated, so it can feed another branch.
     assert base[0][1] == {}
+    # The same resolved list as one batch, for a text encoder's own image slots.
+    assert images.shape[0] == 2 and images.shape[3] == 3
 
 
 def test_attaching_to_conditioning_that_already_has_references_appends(pack):
@@ -392,10 +399,23 @@ def test_attaching_to_conditioning_that_already_has_references_appends(pack):
     (char,) = loader.load("Ada.char")
     refs = module.NODE_CLASS_MAPPINGS["OmnicharDecodeCharacter"]().decode(char, "ordinal")[2]
 
-    (out,) = module.NODE_CLASS_MAPPINGS["OmnicharCharacterReferenceLatent"]().attach(
-        [["cond", {"reference_latents": ["existing"]}]], refs, FakeVae()
-    )
+    (out, _images) = module.NODE_CLASS_MAPPINGS[
+        "OmnicharCharacterReferenceLatent"
+    ]().attach([["cond", {"reference_latents": ["existing"]}]], refs, FakeVae())
     assert out[0][1]["reference_latents"] == ["existing", "latent1", "latent2"]
+
+
+def test_decode_qwen_style_names_positions_as_image_tags(pack):
+    """Qwen-Image 2.1 and Krea 2 address references as <image1>, <image2>, ..."""
+    module, _ = pack
+    loader = module.NODE_CLASS_MAPPINGS["OmnicharLoadCharacter"]()
+    (char,) = loader.load("Ada.char")
+
+    _, _, refs, _, prompt = module.NODE_CLASS_MAPPINGS["OmnicharDecodeCharacter"]().decode(
+        char, "qwen"
+    )
+    assert prompt.startswith("<image1> and <image2> show Ada,")
+    assert len(refs) == 2
 
 
 def test_attaching_no_references_says_so(pack):

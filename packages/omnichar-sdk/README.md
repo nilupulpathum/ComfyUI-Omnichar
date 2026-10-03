@@ -57,9 +57,10 @@ through this command without a Python binding.
 ## Notes
 
 `style` picks the addressing a model was trained on. FLUX.2 reads ordinal prose, MiniMax H3 reads
-`<Picture N>`, Seedance reads `@ImageN`. `description-only` drops positions, which is what a LoRA
-needs. `first_position` sets the number the first reference gets, so a prompt and a sheet built at
-the same offset agree about which image is image one.
+`<Picture N>`, Seedance reads `@ImageN`, Qwen-Image 2.1 and Krea 2 read `<imageN>`.
+`description-only` drops positions, which is what a LoRA needs. `first_position` sets the number
+the first reference gets, so a prompt and a sheet built at the same offset agree about which image
+is image one.
 
 `limit` divides the slots between face, body and outfit rather than cutting the end of the list,
 so a character does not lose its wardrobe when a model takes fewer references than it has.

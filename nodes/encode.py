@@ -8,7 +8,9 @@ from pathlib import Path
 
 from omnichar_sdk import (
     FLUX2_KLEIN_ARCH,
+    KREA2_TURBO_ARCH,
     MINIMAX_H3_ARCH,
+    QWEN_IMAGE_2_1_ARCH,
     Character,
     CharError,
     encode_character,
@@ -84,8 +86,8 @@ class OmnicharEncodeCharacter:
     FUNCTION = "encode"
     CATEGORY = CATEGORY
     DESCRIPTION = (
-        "Build a character from reference images. Compiles a reference set for FLUX.2 and "
-        "MiniMax H3, so it applies on any model that takes references."
+        "Build a character from reference images. Compiles a reference set for FLUX.2, "
+        "MiniMax H3, Krea 2 and Qwen-Image 2.1, so it applies on any model that takes references."
     )
 
     def encode(self, name, description, resolution, **images):
@@ -104,7 +106,12 @@ class OmnicharEncodeCharacter:
             name,
             description,
             pairs,
-            archs=(FLUX2_KLEIN_ARCH, MINIMAX_H3_ARCH),
+            archs=(
+                FLUX2_KLEIN_ARCH,
+                MINIMAX_H3_ARCH,
+                KREA2_TURBO_ARCH,
+                QWEN_IMAGE_2_1_ARCH,
+            ),
             resolution=resolution or None,
         )
         return (Character.from_bytes(_to_bytes(doc), f"{name}.char"),)

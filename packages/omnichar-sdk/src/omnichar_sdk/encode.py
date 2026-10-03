@@ -22,17 +22,25 @@ PAYLOAD_ENCODER_VERSION = "1"
 FLUX2_KLEIN_ARCH = "flux2-klein"
 MINIMAX_H3_ARCH = "minimax-h3"
 FAL_REF_ARCH = "fal-ref"
+KREA2_TURBO_ARCH = "krea2-turbo"
+KREA2_RAW_ARCH = "krea2-raw"
+QWEN_IMAGE_2_1_ARCH = "qwen-image-2.1"
 
 #: What each model accepts as a reference. A video model has its own grid, so this is not one
 #: constant, and the policy rides in the payload because the fingerprint is taken against it.
 PAYLOAD_POLICY: dict[str, Any] = {"max_pixels": 1024 * 1024, "multiple_of": 16}
 MINIMAX_H3_POLICY: dict[str, Any] = {"short_edge": 2048, "multiple_of": 32, "max_aspect": 4.0}
 FAL_REF_POLICY: dict[str, Any] = {"max_pixels": 1024 * 1024, "multiple_of": 8}
+KREA2_POLICY: dict[str, Any] = {"short_edge": 2048, "multiple_of": 32, "max_refs": 3}
+QWEN_IMAGE_2_1_POLICY: dict[str, Any] = {"max_pixels": 2048 * 2048, "multiple_of": 32, "max_refs": 10}
 
 REFERENCE_POLICIES: dict[str, dict[str, Any]] = {
     FLUX2_KLEIN_ARCH: PAYLOAD_POLICY,
     MINIMAX_H3_ARCH: MINIMAX_H3_POLICY,
     FAL_REF_ARCH: FAL_REF_POLICY,
+    KREA2_TURBO_ARCH: KREA2_POLICY,
+    KREA2_RAW_ARCH: KREA2_POLICY,
+    QWEN_IMAGE_2_1_ARCH: QWEN_IMAGE_2_1_POLICY,
 }
 
 
@@ -128,7 +136,7 @@ def encode_character(
     description: str,
     images: Sequence[tuple[Image, str]],
     *,
-    archs: Sequence[str] = (FLUX2_KLEIN_ARCH, MINIMAX_H3_ARCH),
+    archs: Sequence[str] = (FLUX2_KLEIN_ARCH, MINIMAX_H3_ARCH, KREA2_TURBO_ARCH, QWEN_IMAGE_2_1_ARCH),
     resolution: int | None = None,
     app_version: str = "",
 ) -> cf.CharDoc:

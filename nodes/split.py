@@ -7,9 +7,9 @@ from omnichar_sdk import CharChanged
 
 from .common import CATEGORY, REFS_INPUT, fail_on_change, to_image
 
-#: Matches MiniMax H3's ref_image_0 through ref_image_4, which is the widest slot set in use.
-#: A ComfyUI node cannot grow outputs to fit its input, so this is fixed and the spare ones stay
-#: unwired. Use Character Reference for a model with more slots than this.
+#: Matches MiniMax H3's ref_image_0 through ref_image_4. A ComfyUI node cannot grow outputs
+#: to fit its input, so this is fixed and the spare ones stay unwired. Use Character Reference
+#: for a model with more slots than this, like Qwen-Image 2.1 with up to 10 image inputs.
 SLOTS = 5
 
 
@@ -23,9 +23,10 @@ class OmnicharCharacterReferencesSplit:
     FUNCTION = "split"
     CATEGORY = CATEGORY
     DESCRIPTION = (
-        "Every reference on its own output, numbered to match a model's reference slots. One of "
-        "these replaces a Character Reference node per slot. Outputs past the character's "
-        "reference count are empty, so leave those slots unwired."
+        "Every reference on its own output, numbered to match a model's reference slots, like "
+        "MiniMax H3's ref_image_N or Qwen-Image 2.1's image_N. One of these replaces a "
+        "Character Reference node per slot. Outputs past the character's reference count are "
+        "empty, so leave those slots unwired."
     )
 
     def split(self, refs):

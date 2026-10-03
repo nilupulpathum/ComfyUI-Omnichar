@@ -8,7 +8,7 @@ from collections.abc import Sequence
 from .charfile import ROLE_BODY, ROLE_CLOTH, ROLE_FACE, ROLES
 
 #: The addressing form each model family was trained on.
-STYLES = ("ordinal", "token", "at-image", "description-only")
+STYLES = ("ordinal", "token", "at-image", "qwen", "description-only")
 
 #: Naming only: "slim build" would be text competing with the reference images.
 _ROLE_BINDINGS: dict[str, str] = {
@@ -70,6 +70,13 @@ def prompt_prefix(
     elif style == "at-image":
         # Seedance's own addressing syntax, so each position is declared exactly once here.
         tokens = [f"@Image{n}" for n in positions]
+        if len(tokens) == 1:
+            which = f"{tokens[0]} shows"
+        else:
+            which = f"{', '.join(tokens[:-1])} and {tokens[-1]} show"
+    elif style == "qwen":
+        # Qwen-Image and Krea 2 addressing: <image1>, <image2>, etc.
+        tokens = [f"<image{n}>" for n in positions]
         if len(tokens) == 1:
             which = f"{tokens[0]} shows"
         else:
