@@ -33,7 +33,8 @@ class OmnicharDecodeCharacter:
                         "default": "ordinal",
                         "tooltip": (
                             "How the model addresses reference positions. FLUX.2 reads ordinal "
-                            "prose, MiniMax H3 reads <Picture N>, Seedance reads @ImageN. "
+                            "prose, MiniMax H3 reads <Picture N>, Seedance reads @ImageN, "
+                            "Qwen-Image 2.1 and Krea 2 read <imageN>. "
                             "description-only drops positions, which is what a LoRA needs."
                         ),
                     },

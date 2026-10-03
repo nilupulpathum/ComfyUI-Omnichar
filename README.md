@@ -9,8 +9,8 @@ Currently supports: Minimax H3, Krea2, Flux2 dev, klein9B & 4B.
 
 A `.char` holds a character's reference images, its locked description, and often a trained LoRA.
 Build one here with Encode Character, or in [Omnichar Studio](https://omnichar.org) on your own GPU
-or [Omnichar Cloud](https://cloud.omnichar.org). The same file then feeds FLUX.2, MiniMax H3 and
-anything else that takes references.
+or [Omnichar Cloud](https://cloud.omnichar.org). The same file then feeds FLUX.2, MiniMax H3,
+Krea 2, Qwen-Image 2.1 and anything else that takes references.
 
 ## Features
 
@@ -63,7 +63,7 @@ and both read the same files.
 | Decode Character | `char`, `style`, `clip`, `prompt`, `arch`, `max_references`, `size_from`, `fit` | `conditioning`, `references`, `refs`, `sheet`, `prompt` |
 | Character Reference | `refs`, `index` | `image`, `role`, `count` |
 | Character References Split | `refs` | `image_0` to `image_4`, `count` |
-| Character Reference Latent | `conditioning`, `refs`, `vae` | `conditioning` |
+| Character Reference Latent | `conditioning`, `refs`, `vae`, `size_from`, `fit` | `conditioning`, `images` |
 | Apply Character LoRA | `model`, `clip`, `char`, `strength`, `arch`, `min_key_coverage` | `model`, `clip` |
 | Encode Character | `name`, `description`, `resolution`, `face`/`body`/`cloths` (3 slots each) | `char` |
 | Save Character | `char`, `filename`, `overwrite` | `path` |
@@ -96,11 +96,19 @@ that take one batch read `references`. Models with numbered slots, like MiniMax 
 a Character References Split node, or a Character Reference node per slot. Edit models that read references as latents, like FLUX.2, take
 `refs` into a Character Reference Latent node on both the positive and the negative conditioning.
 
+Models whose text encoder takes reference images in its own slots, like Qwen-Image 2.1
+(`image_1` through `image_10`) and Krea 2, use the `qwen` prompt style on Decode Character,
+which addresses positions as `<image1>`, `<image2>` and so on. Wire the Split outputs, or one
+Character Reference node per slot, into the model's text encoder image inputs. For more slots
+than Split covers, use a Character Reference node per slot.
+
 ### Workflows
 
 - [Build a `.char`](workflows/character_encode.json) from face, body and wardrobe references
 - [FLUX.2 Klein 9B](workflows/flux_klein_9b_image_char.json), references as latents, to an image
 - [MiniMax H3](workflows/minimax_h3_char_video.json), references in numbered slots, to a video
+- [Qwen-Image 2.1](workflows/qwen_image_2_1_char_image.json), references in text encoder slots, to an image
+- [Krea 2 Turbo](workflows/krea2_turbo_char_image.json), references in text encoder slots, to an image
 
 ## Python Library
 

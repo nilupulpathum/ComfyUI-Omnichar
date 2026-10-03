@@ -1330,5 +1330,123 @@
   "first": 1,
   "desc": "  spaced   out  ",
   "out": "spaced out "
+ },
+ {
+  "style": "qwen",
+  "n": 1,
+  "roles": [
+   "face"
+  ],
+  "role_lines": false,
+  "first": 1,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow",
+  "out": "<image1> shows Ada, the same character in every image. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
+ },
+ {
+  "style": "qwen",
+  "n": 1,
+  "roles": [
+   "face"
+  ],
+  "role_lines": false,
+  "first": 1,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow.",
+  "out": "<image1> shows Ada, the same character in every image. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
+ },
+ {
+  "style": "qwen",
+  "n": 1,
+  "roles": [
+   "face"
+  ],
+  "role_lines": false,
+  "first": 1,
+  "desc": "",
+  "out": "<image1> shows Ada, the same character in every image. "
+ },
+ {
+  "style": "qwen",
+  "n": 1,
+  "roles": [
+   "face"
+  ],
+  "role_lines": false,
+  "first": 2,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow",
+  "out": "<image2> shows Ada, the same character in every image. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
+ },
+ {
+  "style": "qwen",
+  "n": 2,
+  "roles": [
+   "face",
+   "body"
+  ],
+  "role_lines": false,
+  "first": 1,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow",
+  "out": "<image1> and <image2> show Ada, the same character in every image. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
+ },
+ {
+  "style": "qwen",
+  "n": 2,
+  "roles": [
+   "face",
+   "body"
+  ],
+  "role_lines": false,
+  "first": 1,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow.",
+  "out": "<image1> and <image2> show Ada, the same character in every image. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
+ },
+ {
+  "style": "qwen",
+  "n": 2,
+  "roles": [
+   "face",
+   "body"
+  ],
+  "role_lines": false,
+  "first": 1,
+  "desc": "",
+  "out": "<image1> and <image2> show Ada, the same character in every image. "
+ },
+ {
+  "style": "qwen",
+  "n": 2,
+  "roles": [
+   "face",
+   "body"
+  ],
+  "role_lines": true,
+  "first": 1,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow",
+  "out": "<image1> and <image2> show Ada, the same character in every image. Image 1 shows Ada's face. Image 2 shows Ada's full body and build. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
+ },
+ {
+  "style": "qwen",
+  "n": 3,
+  "roles": [
+   "face",
+   "body",
+   "cloth"
+  ],
+  "role_lines": false,
+  "first": 1,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow",
+  "out": "<image1>, <image2> and <image3> show Ada, the same character in every image. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
+ },
+ {
+  "style": "qwen",
+  "n": 3,
+  "roles": [
+   "face",
+   "body",
+   "cloth"
+  ],
+  "role_lines": true,
+  "first": 1,
+  "desc": "Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow",
+  "out": "<image1>, <image2> and <image3> show Ada, the same character in every image. Image 1 shows Ada's face. Image 2 shows Ada's full body and build. Image 3 shows Ada's outfit. Ada, a woman in her thirties with short dark hair and a scar through her left eyebrow. "
  }
 ]

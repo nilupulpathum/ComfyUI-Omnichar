@@ -3,7 +3,9 @@
 import pytest
 from omnichar_sdk import (
     FLUX2_KLEIN_ARCH,
+    KREA2_TURBO_ARCH,
     MINIMAX_H3_ARCH,
+    QWEN_IMAGE_2_1_ARCH,
     Character,
     CharError,
     charfile,
@@ -47,8 +49,18 @@ def test_roles_are_ordered_face_body_cloth():
 
 def test_a_reference_set_is_compiled_for_each_arch():
     doc = encode_character("Ada", "d", imgs())
-    assert sorted(doc.manifest.payloads) == [FLUX2_KLEIN_ARCH, MINIMAX_H3_ARCH]
-    for arch in (FLUX2_KLEIN_ARCH, MINIMAX_H3_ARCH):
+    assert sorted(doc.manifest.payloads) == [
+        FLUX2_KLEIN_ARCH,
+        KREA2_TURBO_ARCH,
+        MINIMAX_H3_ARCH,
+        QWEN_IMAGE_2_1_ARCH,
+    ]
+    for arch in (
+        FLUX2_KLEIN_ARCH,
+        MINIMAX_H3_ARCH,
+        KREA2_TURBO_ARCH,
+        QWEN_IMAGE_2_1_ARCH,
+    ):
         assert charfile.payload_valid(doc.manifest, arch, "1"), arch
 
 

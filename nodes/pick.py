@@ -21,8 +21,8 @@ class OmnicharCharacterReference:
                         "min": 0,
                         "max": 63,
                         "tooltip": (
-                            "Counting from zero, so index 0 goes in ref_image_0 and the prompt "
-                            "calls it image 1."
+                            "Counting from zero, so index 0 goes in ref_image_0 (or image_1 on "
+                            "Qwen-Image 2.1) and the prompt calls it image 1."
                         ),
                     },
                 ),

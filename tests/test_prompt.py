@@ -29,7 +29,20 @@ def test_matches_omnichar_byte_for_byte(case):
 
 
 def test_golden_covers_every_style():
-    assert {c["style"] for c in GOLDEN} == {"ordinal", "token", "at-image", "description-only"}
+    assert {c["style"] for c in GOLDEN} == {
+        "ordinal",
+        "token",
+        "at-image",
+        "qwen",
+        "description-only",
+    }
+
+
+def test_qwen_style_addresses_positions_as_image_tags():
+    out = prompt_prefix(NAME, "A dark haired woman.", ["face", "body"], style="qwen")
+    assert out.startswith("<image1> and <image2> show Ada,")
+    out = prompt_prefix(NAME, "", ["face"], style="qwen")
+    assert out == "<image1> shows Ada, the same character in every image. "
 
 
 def test_description_only_drops_positions_even_with_references():
