@@ -112,17 +112,19 @@
       "mode": 0,
       "inputs": [
         {"name": "clip", "type": "CLIP", "link": 3},
-        {"name": "image_1", "type": "IMAGE", "link": 8},
-        {"name": "image_2", "type": "IMAGE", "link": 9},
+        {"name": "prompt", "type": "STRING", "link": 7},
+        {"name": "negative_prompt", "type": "STRING", "link": null},
         {"name": "vae", "type": "VAE", "link": 4},
-        {"name": "prompt", "type": "STRING", "link": 7}
+        {"name": "resolution", "type": "INT", "link": null},
+        {"name": "image_1", "type": "IMAGE", "link": 8},
+        {"name": "image_2", "type": "IMAGE", "link": 9}
       ],
       "outputs": [
         {"name": "positive", "type": "CONDITIONING", "links": [10]},
         {"name": "negative", "type": "CONDITIONING", "links": [11]}
       ],
       "properties": {"cnr_id": "comfy-core", "ver": "0.30.0", "Node name for S&R": "TextEncodeQwenImage21"},
-      "widgets_values": ["", "", 1024]
+      "widgets_values": ["", 1024]
     },
     {
       "id": 8,
@@ -147,9 +149,15 @@
       "mode": 0,
       "inputs": [
         {"name": "model", "type": "MODEL", "link": 2},
+        {"name": "seed", "type": "INT", "link": null},
+        {"name": "steps", "type": "INT", "link": null},
+        {"name": "cfg", "type": "FLOAT", "link": null},
+        {"name": "sampler_name", "type": "COMBO", "link": null},
+        {"name": "scheduler", "type": "COMBO", "link": null},
         {"name": "positive", "type": "CONDITIONING", "link": 10},
         {"name": "negative", "type": "CONDITIONING", "link": 11},
-        {"name": "latent_image", "type": "LATENT", "link": 12}
+        {"name": "latent_image", "type": "LATENT", "link": 12},
+        {"name": "denoise", "type": "FLOAT", "link": null}
       ],
       "outputs": [{"name": "LATENT", "type": "LATENT", "links": [13]}],
       "properties": {"cnr_id": "comfy-core", "ver": "0.30.0", "Node name for S&R": "KSampler"},
@@ -192,12 +200,12 @@
     [4, 4, 0, 7, 3, "VAE"],
     [5, 4, 0, 10, 1, "VAE"],
     [6, 5, 2, 6, 0, "CHARACTER_REFS"],
-    [7, 5, 4, 7, 4, "STRING"],
-    [8, 6, 0, 7, 1, "IMAGE"],
-    [9, 6, 1, 7, 2, "IMAGE"],
-    [10, 7, 0, 9, 1, "CONDITIONING"],
-    [11, 7, 1, 9, 2, "CONDITIONING"],
-    [12, 8, 0, 9, 3, "LATENT"],
+    [7, 5, 4, 7, 1, "STRING"],
+    [8, 6, 0, 7, 5, "IMAGE"],
+    [9, 6, 1, 7, 6, "IMAGE"],
+    [10, 7, 0, 9, 6, "CONDITIONING"],
+    [11, 7, 1, 9, 7, "CONDITIONING"],
+    [12, 8, 0, 9, 8, "LATENT"],
     [13, 9, 0, 10, 0, "LATENT"],
     [14, 10, 0, 11, 0, "IMAGE"]
   ],
